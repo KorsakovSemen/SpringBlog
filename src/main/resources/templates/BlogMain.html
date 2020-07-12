@@ -11,7 +11,7 @@
 
 <div class="container">
     <div th:each="post : ${posts}" class="alert alert-info mt-2">
-        <h3 th:text = "${post.firstName}"/>
+        <h3 th:text = "${post.title}"/>
         <a th:href="'/blog/' + ${post.id}">Details</a>
     </div>
 </div>
