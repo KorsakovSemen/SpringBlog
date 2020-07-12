@@ -9,6 +9,13 @@
 
 <header th:insert="blocks/Header :: header"></header>
 
+<div class="container">
+    <div th:each="post : ${posts}" class="alert alert-info mt-2">
+        <h3 th:text = "${post.firstName}"/>
+        <a th:href="'/blog/' + ${post.id}">Details</a>
+    </div>
+</div>
+
 <footer th:insert="blocks/Footer :: footer"></footer>
 
 </body>
