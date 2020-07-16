@@ -24,6 +24,11 @@ public class Post {
         this.rating = rating;
     }
 
+    public Post(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
