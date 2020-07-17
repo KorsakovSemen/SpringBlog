@@ -29,6 +29,7 @@ public class Post {
         this.description = description;
     }
 
+
     public Long getId() {
         return id;
     }
