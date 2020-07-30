@@ -39,7 +39,9 @@ class SocialApplication extends WebSecurityConfigurerAdapter {
                         .anyRequest().authenticated()
 
                 )
-
+                .csrf(c -> c
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                )
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 )

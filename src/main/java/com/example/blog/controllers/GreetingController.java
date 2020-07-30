@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class GreetingController {
 
-    @GetMapping("/")
-    public String greeting(Model model) {
-        model.addAttribute("title", "Главная страница");
-        return "Greeting";
-    }
 
     @GetMapping("/about")
     public String about(Model model) {

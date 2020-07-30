@@ -3,7 +3,10 @@
 <head>
     <title>Блог</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -12,7 +15,7 @@
 <div class="container">
     <div th:each="post : ${posts}" class="alert alert-info mt-2">
         <h3 th:text = "${post.title}"/>
-        <a th:href="'/blog/' + ${post.id}">Details</a>
+        <a th:href="'/' + ${post.id}">Details</a>
     </div>
 </div>
 

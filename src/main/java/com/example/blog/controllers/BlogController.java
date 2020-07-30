@@ -18,29 +18,29 @@ public class BlogController {
     private PostRepository postRepository;
 
 
-    @GetMapping("/blog")
+    @GetMapping("/")
     public String blogMain(Model model) {
         Iterable<Post> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
         return "BlogMain";
     }
 
-    @GetMapping("/blog/add")
+    @GetMapping("/add")
     public String blogAdd(Model model) {
         return "BlogAdd";
     }
 
-    @PostMapping("/blog/add")
+    @PostMapping("/add")
     public String blogPostAdd(@RequestParam String title, @RequestParam String description, Model model) {
         Post post = new Post(title, description);
         postRepository.save(post);
-        return "redirect:/blog";
+        return "redirect:/";
     }
 
-    @GetMapping("/blog/{id}")
+    @GetMapping("/{id}")
     public String blogDetails(@PathVariable(value = "id") long id, Model model) {
         if (!postRepository.existsById(id))
-            return "redirect:/blog";
+            return "redirect:/";
 
         ArrayList<Post> res = new ArrayList<>();
         postRepository.findById(id).ifPresent(res::add);
@@ -48,10 +48,10 @@ public class BlogController {
         return "BlogDetails";
     }
 
-    @GetMapping("/blog/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String blogEdit(@PathVariable(value = "id") long id, Model model) {
         if (!postRepository.existsById(id))
-            return "redirect:/blog";
+            return "redirect:/";
 
         ArrayList<Post> res = new ArrayList<>();
         postRepository.findById(id).ifPresent(res::add);
@@ -59,20 +59,20 @@ public class BlogController {
         return "BlogEdit";
     }
 
-    @PostMapping("/blog/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String blogPostUpdate(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String description, Model model) {
         Post post = postRepository.findById(id).orElseThrow();
         post.setTitle(title);
         post.setDescription(description);
         postRepository.save(post);
-        return "redirect:/blog";
+        return "redirect:/";
     }
 
-    @PostMapping("/blog/{id}/remove")
+    @PostMapping("/{id}/remove")
     public String blogRemove(@PathVariable(value = "id") long id, Model model) {
         Post post = postRepository.findById(id).orElseThrow();
         postRepository.delete(post);
-        return "redirect:/blog";
+        return "redirect:/";
     }
 
 

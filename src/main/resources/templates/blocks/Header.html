@@ -1,4 +1,4 @@
-<div class="container" th:fragment="header">
+<div class="container" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
@@ -13,9 +13,10 @@
                 </a>
                 <a class="btn btn-sm btn-outline-secondary" href="/">Sign up</a>
                 <div class="container unauthenticated">
-                    <div>
-                        With GitHub: <a href="/oauth2/authorization/github">click here</a>
-                    </div>
+                    With GitHub: <a href="/oauth2/authorization/github">click here</a>
+                </div>
+                <div class="container authenticated" style="display:none">
+                    Logged in as: <span id="user"></span>
                 </div>
                 <div class="container authenticated">
                     Logged in as: <span id="user"></span>
@@ -29,14 +30,21 @@
 
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 text-muted" href="/blog/add">New post</a>
-            <a class="p-2 text-muted" href="/blog">Blog</a>
+            <a class="p-2 text-muted" href="/add">New post</a>
+            <a class="p-2 text-muted" href="/">Blog</a>
         </nav>
     </div>
 
 
 </div>
-
+<script type="text/javascript">var logout = function() {
+    $.post("/logout", function() {
+        $("#user").html('');
+        $(".unauthenticated").show();
+        $(".authenticated").hide();
+    })
+    return true;
+}</script>
 <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
 <script type="text/javascript">
     $.get("/user", function(data) {
@@ -45,14 +53,7 @@
         $(".authenticated").show()
     });
 }
-var logout = function() {
-    $.post("/logout", function() {
-        $("#user").html('');
-        $(".unauthenticated").show();
-        $(".authenticated").hide();
-    })
-    return true;
-}
+
 $.get("/error", function(data) {
     if (data) {
         $(".error").html(data);
